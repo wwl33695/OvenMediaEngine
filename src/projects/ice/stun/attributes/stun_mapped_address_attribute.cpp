@@ -8,7 +8,11 @@
 //==============================================================================
 #include "stun_mapped_address_attribute.h"
 
-#include <arpa/inet.h>
+#ifdef _WIN32
+	#include <winsock2.h>
+#else
+	#include <arpa/inet.h>
+#endif
 
 #include "../../ice_private.h"
 

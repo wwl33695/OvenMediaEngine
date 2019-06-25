@@ -33,8 +33,10 @@ namespace ov
 		explicit SocketAddress(const char *hostname, uint16_t port);
 		// IPv4 주소
 		explicit SocketAddress(const sockaddr_in &address);
+#ifndef _WIN32
 		// IPv6 주소
 		explicit SocketAddress(const sockaddr_in6 &address);
+#endif
 		explicit SocketAddress(const sockaddr_storage &address);
 
 		// 복사 생성자
@@ -53,7 +55,8 @@ namespace ov
 
 		void SetFamily(SocketFamily family)
 		{
-			_address_storage.ss_family = static_cast<sa_family_t>(family);
+			_address_storage.ss_family = int(family);
+//			_address_storage.ss_family = static_cast<sa_family_t>(family);
 		}
 
 		SocketFamily GetFamily() const
@@ -70,37 +73,40 @@ namespace ov
 
 		const sockaddr *Address() const noexcept;
 		const sockaddr_in *AddressForIPv4() const noexcept;
+#ifndef _WIN32
 		const sockaddr_in6 *AddressForIPv6() const noexcept;
-
+#endif
 		const in_addr *AddrInForIPv4() const noexcept;
+#ifndef _WIN32
 		const in6_addr *AddrInForIPv6() const noexcept;
-
+#endif
 		inline operator in_addr *() noexcept // NOLINT
 		{
 			return &(_address_ipv4->sin_addr);
 		}
 
+#ifndef _WIN32
 		inline operator in6_addr *() noexcept // NOLINT
 		{
 			return &(_address_ipv6->sin6_addr);
 		}
-
+#endif
 		void *ToAddrIn()
 		{
 			switch(_address_storage.ss_family)
 			{
 				case AF_INET:
 					return &(_address_ipv4->sin_addr);
-
+#ifndef _WIN32
 				case AF_INET6:
 					return &(_address_ipv6->sin6_addr);
-
+#endif
 				default:
 					return nullptr;
 			}
 		}
 
-		socklen_t AddressLength() const noexcept;
+		int AddressLength() const noexcept;
 
 		void UpdateIPAddress();
 
@@ -110,8 +116,9 @@ namespace ov
 		sockaddr_storage _address_storage;
 		// _address_storage내 데이터를 가리키는 포인터 (실제로 메모리가 할당되어 있거나 하지는 않음)
 		sockaddr_in *_address_ipv4;
+#ifndef _WIN32
 		sockaddr_in6 *_address_ipv6;
-
+#endif
 		ov::String _hostname;
 		ov::String _ip_address;
 	};

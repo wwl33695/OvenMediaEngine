@@ -8,7 +8,11 @@
 //==============================================================================
 #pragma once
 
-#include <arpa/inet.h>
+#ifdef _WIN32
+	#include <winsock2.h>
+#else
+	#include <arpa/inet.h>
+#endif
 
 #include <functional>
 
@@ -16,14 +20,16 @@
 
 namespace ov
 {
-	enum class SocketConnectionState : int8_t
+	enum SocketConnectionState : int8_t
+//	enum class SocketConnectionState : int8_t
 	{
 		Connected,
 		Disconnected,                   // 연결이 끊어짐
 		Error                           // 오류가 발생해서 연결이 끊어짐
 	};
 
-	enum class SocketFamily : sa_family_t
+	enum SocketFamily : int8_t
+//	enum class SocketFamily : sa_family_t
 	{
 		Unknown = AF_UNSPEC,
 

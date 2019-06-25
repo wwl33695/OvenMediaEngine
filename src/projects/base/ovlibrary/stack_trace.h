@@ -31,8 +31,9 @@ namespace ov
 			char *function_name = nullptr;
 			char *offset = nullptr;
 		};
-
+#ifndef _WIN32
 		static void AbortHandler(int signum, siginfo_t *si, void *unused);
+#endif
 		static String GetStackTraceInternal(int offset = 2, int line_count = -1);
 		static void WriteStackTrace(int signum, String sig_name);
 

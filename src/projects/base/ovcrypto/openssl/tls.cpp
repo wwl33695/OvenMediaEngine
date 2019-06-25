@@ -30,6 +30,7 @@ namespace ov
 
 		if(bio_methods == nullptr)
 		{
+//			bio_methods = ::BIO_s_mem();
 			bio_methods = ::BIO_meth_new(BIO_TYPE_MEM, "ov::Tls");
 
 			int result = 1;

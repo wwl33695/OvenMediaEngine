@@ -7,7 +7,7 @@ Certificate::Certificate(X509 *x509)
 	_X509 = x509;
 
 	// Increments the reference count
-	X509_up_ref(_X509);
+//	X509_up_ref(_X509);
 }
 
 Certificate::~Certificate()

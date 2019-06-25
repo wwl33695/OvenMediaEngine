@@ -37,7 +37,8 @@ namespace ov
 			return false;
 		}
 
-		EVP_MD_CTX *context = EVP_MD_CTX_new();
+		EVP_MD_CTX *context = EVP_MD_CTX_create();
+//		EVP_MD_CTX *context = EVP_MD_CTX_new();
 
 		if(context == nullptr)
 		{

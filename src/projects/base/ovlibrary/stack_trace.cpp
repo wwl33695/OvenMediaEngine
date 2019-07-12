@@ -84,7 +84,6 @@ namespace ov
 		return std::move(GetStackTraceInternal(2, line_count));
 	}
 
-#ifndef _WIN32
 	void StackTrace::AbortHandler(int signum, siginfo_t *si, void *unused)
 	{
 		String sig_name;
@@ -167,8 +166,7 @@ namespace ov
 
 		exit(signum);
 	}
-#endif
-	
+
 	bool StackTrace::ParseLinuxStyleLine(char *line, ParseResult *parse_result)
 	{
 		char *begin_name = nullptr;

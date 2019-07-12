@@ -10,13 +10,9 @@
 
 #include "socket_address.h"
 
-#ifdef WIN32
-    #include <winsock2.h>
-#else
-	#include <sys/socket.h>
-	#include <sys/epoll.h>
-	#include <netinet/in.h>
-#endif
+#include <sys/socket.h>
+#include <sys/epoll.h>
+#include <netinet/in.h>
 
 #include <utility>
 #include <memory>

@@ -430,7 +430,7 @@ namespace ov
 
 			OV_ASSERT(remained_bytes >= 0, "_data is changed while using byte stream");
 
-			remained_bytes = std::max(0, (int)remained_bytes);
+			remained_bytes = std::max(0L, remained_bytes);
 
 			return remained_bytes / sizeof(T);
 		}

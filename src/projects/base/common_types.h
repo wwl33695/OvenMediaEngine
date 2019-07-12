@@ -153,6 +153,9 @@ struct CodecSpecificInfoOpus
 
 union CodecSpecificInfoUnion
 {
+public:
+	CodecSpecificInfoUnion(){}
+
 	CodecSpecificInfoGeneric generic;
 
 	CodecSpecificInfoVp8 vp8;
@@ -166,7 +169,10 @@ union CodecSpecificInfoUnion
 
 struct CodecSpecificInfo
 {
+public:
+	CodecSpecificInfo(){}
+
 	CodecType codec_type = CodecType::Unknown;
 	const char *codec_name = nullptr;
-	CodecSpecificInfoUnion codec_specific = { 0 };
+	CodecSpecificInfoUnion codec_specific;
 };

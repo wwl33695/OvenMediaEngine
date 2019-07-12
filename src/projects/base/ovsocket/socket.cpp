@@ -10,11 +10,7 @@
 #include "socket_private.h"
 
 #include <unistd.h>
-#ifdef _WIN32
-	#include <winsock2.h>
-#else
-	#include <arpa/inet.h>
-#endif
+#include <arpa/inet.h>
 #include <sys/fcntl.h>
 #include <algorithm>
 

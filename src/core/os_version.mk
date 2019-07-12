@@ -24,7 +24,3 @@ ifneq (,$(findstring CYGWIN,$(UNAME)))
 	OS_VERSION := windows
 	ANSI_SUPPORTED := true
 endif
-ifneq (,$(findstring MINGW,$(UNAME)))
-	OS_VERSION := windows
-	ANSI_SUPPORTED := true
-endif

@@ -19,10 +19,8 @@
 namespace ov
 {
 	SocketAddress::SocketAddress()
-		: _address_ipv4((sockaddr_in *)(&_address_storage))
-#ifndef _WIN32
-		  ,_address_ipv6((sockaddr_in6 *)(&_address_storage))
-#endif
+		: _address_ipv4((sockaddr_in *)(&_address_storage)),
+		  _address_ipv6((sockaddr_in6 *)(&_address_storage))
 	{
 		::memset(&_address_storage, 0, sizeof(_address_storage));
 		_address_storage.ss_family = AF_UNSPEC;
@@ -98,7 +96,6 @@ namespace ov
 		UpdateIPAddress();
 	}
 
-#ifndef _WIN32
 	SocketAddress::SocketAddress(const sockaddr_in6 &addr_in)
 		: SocketAddress()
 	{
@@ -109,7 +106,6 @@ namespace ov
 
 		UpdateIPAddress();
 	}
-#endif
 
 	SocketAddress::SocketAddress(const sockaddr_storage &address)
 		: SocketAddress()
@@ -205,7 +201,6 @@ namespace ov
 
 					return (compare_result < 0);
 
-#ifndef _WIN32
 				case AF_INET6:
 					compare_result = ::memcmp(&(_address_ipv6->sin6_addr), &(socket._address_ipv6->sin6_addr), sizeof(_address_ipv6->sin6_addr));
 
@@ -215,7 +210,7 @@ namespace ov
 					}
 
 					return (compare_result < 0);
-#endif
+
 				default:
 					// unknown family
 					break;
@@ -297,7 +292,7 @@ namespace ov
 							stop = true;
 
 							break;
-#ifndef _WIN32
+
 						case AF_INET6:
 							// IPv6 항목 찾음
 
@@ -313,7 +308,7 @@ namespace ov
 								_address_storage.ss_family = AF_INET6;
 							}
 							break;
-#endif
+
 						default:
 							break;
 					}
@@ -417,7 +412,6 @@ namespace ov
 		return _address_ipv4;
 	}
 
-#ifndef _WIN32
 	const sockaddr_in6 *SocketAddress::AddressForIPv6() const noexcept
 	{
 		if(_address_storage.ss_family != AF_INET6)
@@ -428,7 +422,6 @@ namespace ov
 
 		return _address_ipv6;
 	}
-#endif
 
 	const in_addr *SocketAddress::AddrInForIPv4() const noexcept
 	{
@@ -441,7 +434,6 @@ namespace ov
 		return &(_address_ipv4->sin_addr);
 	}
 
-#ifndef _WIN32
 	const in6_addr *SocketAddress::AddrInForIPv6() const noexcept
 	{
 		if(_address_storage.ss_family != AF_INET6)
@@ -452,9 +444,8 @@ namespace ov
 
 		return &(_address_ipv6->sin6_addr);
 	}
-#endif
 
-	int SocketAddress::AddressLength() const noexcept
+	socklen_t SocketAddress::AddressLength() const noexcept
 	{
 		switch(_address_storage.ss_family)
 		{

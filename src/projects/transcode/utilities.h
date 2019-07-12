@@ -13,7 +13,7 @@ extern "C" {
 	#include <libavutil/parseutils.h>
 	#include <libavutil/pixdesc.h>
 	#include <libavfilter/avfilter.h>
-	#include <libavfilter/avfiltergraph.h>
+//	#include <libavfilter/avfiltergraph.h>
 	#include <libavfilter/buffersink.h>
 	#include <libavfilter/buffersrc.h>
 	#include <libavformat/avio.h>

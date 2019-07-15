@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Server version="2">
+	<Name>OvenMediaEngine</Name>
+	<Hosts>
+		<Host>
+			<Name>default</Name>
+			<IP>*</IP>
+
+			<Ports>
+				<Origin />
+			</Ports>
+
+			<Applications>
+				<Application>
+					<Name>app</Name>
+					<Type>live</Type>
+
+					<Encodes>
+						<Encode>
+							<Name>VP8</Name>
+							<Audio>
+								<Codec>opus</Codec>
+								<Bitrate>128000</Bitrate>
+								<Samplerate>48000</Samplerate>
+								<Channel>2</Channel>
+							</Audio>
+							<Video>
+								<Codec>vp8</Codec>
+								<Width>640</Width>
+								<Height>360</Height>
+								<Bitrate>300000</Bitrate>
+								<Framerate>30.0</Framerate>
+							</Video>
+						</Encode>
+						<Encode>
+							<Name>H264</Name>
+							<Audio>
+								<Codec>aac</Codec>
+								<Bitrate>128000</Bitrate>
+								<Samplerate>48000</Samplerate>
+								<Channel>2</Channel>
+							</Audio>
+							<Video>
+								<Codec>h264</Codec>
+								<Width>640</Width>
+								<Height>360</Height>
+								<Bitrate>300000</Bitrate>
+								<Framerate>30.0</Framerate>
+							</Video>
+						</Encode>
+					</Encodes>
+					<Streams>
+						<Stream>
+							<Name>${OriginStreamName}_o</Name>
+							<Profiles>
+								<Profile>VP8</Profile>
+								<Profile>H264</Profile>
+							</Profiles>
+						</Stream>
+					</Streams>
+
+					<Providers>
+						<RTMP />
+					</Providers>
+				</Application>
+			</Applications>
+		</Host>
+	</Hosts>
+</Server>

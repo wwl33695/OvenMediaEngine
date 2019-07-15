@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Server version="2">
+	<Name>OvenMediaEngine</Name>
+	<Hosts>
+		<Host>
+			<Name>default</Name>
+			<IP>*</IP>
+			<!--
+            <TLS>
+                    <ChainCertPath>path/to/file.crt</ChainCertPath>
+                    <CertPath>path/to/file.crt</CertPath>
+                    <KeyPath>path/to/file.key</KeyPath>
+            </TLS>
+            -->
+			<Ports>
+				<DASH>8080</DASH>
+				<HLS>8080</HLS>
+			</Ports>
+
+			<Applications>
+				<Application>
+					<Name>app</Name>
+					<Type>liveedge</Type>
+
+					<Origin>
+						<Primary>srt://[ORIGIN_IP]:9000</Primary>
+					</Origin>
+
+					<Publishers>
+						<WebRTC />
+						<DASH />
+						<HLS />
+					</Publishers>
+				</Application>
+			</Applications>
+		</Host>
+	</Hosts>
+</Server>
